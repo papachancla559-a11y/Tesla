@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Initial Inspection Checklist - TESLA</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f6f8;
+  margin:0;
+  padding:20px;
+}
+.container{
+  max-width:900px;
+  margin:auto;
+  background:#fff;
+  padding:20px;
+  border-radius:8px;
+}
+h1{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:5px;
+  text-align:center;
+}
+.subtitle{text-align:center;margin-bottom:20px}
+.field{margin-bottom:15px}
+label{display:block;font-weight:bold;margin-bottom:6px}
+select,input,textarea{
+  width:100%;
+  padding:10px;
+  font-size:16px;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:20px;
+}
+th,td{
+  border:1px solid #ccc;
+  padding:10px;
+  text-align:center;
+}
+th{background:#eaeaea}
+td:first-child{text-align:left;font-weight:bold}
+textarea{height:80px}
+.actions{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin-top:20px;
+}
+button{
+  padding:10px 18px;
+  font-size:15px;
+  cursor:pointer;
+}
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+
+<body>
+<div class="container">
+
+<h1>
+<img src="https://upload.wikimedia.org/wikipedia/commons/e/e8/Tesla_logo.png" height="40">
+Initial Inspection Checklist - TESLA
+</h1>
+<div class="subtitle">Daily check (Before starting Work)</div>
+
+<div class="field">
+<label>Type of Vehicle</label>
+<select id="type">
+<option value="">Select</option>
+<option value="Reachtruck">Reachtruck</option>
+<option value="EPT">EPT</option>
+<option value="Forklift">Forklift</option>
+<option value="Pallet Jack">Pallet Jack</option>
+<option value="Short EPT">Short EPT</option>
+<option value="Short Pallet Jack">Short Pallet Jack</option>
+<option value="HLOP">HLOP</option>
+</select>
+</div>
+
+<div class="field">
+<label>Serial # (IPP)</label>
+<select id="serial">
+<option value="">Select</option>
+</select>
+</div>
+
+<div class="field">
+<label>Department</label>
+<input id="department" readonly>
+</div>
+
+<table>
+<tr><th>Description</th><th>OK</th><th>NO</th></tr>
+<tr><td>Brakes</td><td><input type="radio" name="Brakes"></td><td><input type="radio" name="Brakes"></td></tr>
+<tr><td>Seatbelt</td><td><input type="radio" name="Seatbelt"></td><td><input type="radio" name="Seatbelt"></td></tr>
+<tr><td>Deadman Button</td><td><input type="radio" name="Deadman"></td><td><input type="radio" name="Deadman"></td></tr>
+<tr><td>Hydraulic Leakage</td><td><input type="radio" name="Hydraulic"></td><td><input type="radio" name="Hydraulic"></td></tr>
+<tr><td>Steering System</td><td><input type="radio" name="Steering"></td><td><input type="radio" name="Steering"></td></tr>
+<tr><td>Wheels</td><td><input type="radio" name="Wheels"></td><td><input type="radio" name="Wheels"></td></tr>
+<tr><td>Forks</td><td><input type="radio" name="Forks"></td><td><input type="radio" name="Forks"></td></tr>
+<tr><td>Lifting Gear</td><td><input type="radio" name="Lifting"></td><td><input type="radio" name="Lifting"></td></tr>
+<tr><td>Horn</td><td><input type="radio" name="Horn"></td><td><input type="radio" name="Horn"></td></tr>
+<tr><td>Handles</td><td><input type="radio" name="Handles"></td><td><input type="radio" name="Handles"></td></tr>
+<tr><td>BMW Approval Sticker</td><td><input type="radio" name="BMW"></td><td><input type="radio" name="BMW"></td></tr>
+<tr><td>Vehicle clean and trash-free</td><td><input type="radio" name="Clean"></td><td><input type="radio" name="Clean"></td></tr>
+<tr><td>Portophone No.</td><td><input type="radio" name="Porto"></td><td><input type="radio" name="Porto"></td></tr>
+</table>
+
+<div class="field">
+<label>Comments</label>
+<textarea></textarea>
+</div>
+
+<div class="field">
+<label>Date</label>
+<input id="date" readonly>
+</div>
+
+<div class="field">
+<label>Filled By</label>
+<input>
+</div>
+
+<div class="field">
+<label>Coordinator</label>
+<input id="coordinator" readonly>
+</div>
+
+<div class="field">
+<label>Signature</label>
+<input>
+</div>
+
+<div class="actions">
+<button onclick="save()">Guardar</button>
+<button onclick="send()">Enviar</button>
+</div>
+
+</div>
+
+<script>
+document.getElementById("date").value = new Date().toLocaleDateString();
+document.getElementById("coordinator").value = "Georgi Panchev";
+
+const DATA = {
+  "Reachtruck":{
+    "91158196":"Outbound","91169636":"Inbound","91181506":"Inbound","91175329":"Outbound",
+    "91158171":"Outbound","91158183":"Inbound","91169632":"eCommerce","91181324":"Outbound",
+    "91128925":"Outbound","91169633":"Outbound","91181507":"Inbound","91175330":"Inventory",
+    "91181508":"Inbound","91181505":"Inventory","91175288":"Inventory","91175286":"Outbound",
+    "91169634":"Outbound","91154896":"Inbound","91169639":"Outbound","91169637":"Outbound",
+    "91171498":"Inbound","91169638":"Inbound","91169671":"Inbound","91169631":"Inbound",
+    "91169635":"Outbound","91197036":"Outbound","91197007":"Outbound","91169695":"Inbound"
+  },
+  "EPT":{
+    "90640496":"Outbound","90640497":"Outbound","90640498":"Outbound","90666110":"Outbound",
+    "90640500":"Outbound","90643630":"Outbound","90643634":"Outbound","90643637":"Outbound",
+    "90666109":"Outbound","90666111":"Outbound","90666112":"Outbound","90666113":"Outbound",
+    "90643649":"Outbound","90666108":"Inbound"
+  },
+  "Forklift":{
+    "FN641731":"Expedition","FN644089":"Expedition","FN644092":"Expedition","FN680609":"Expedition",
+    "FN680717":"Facility","FN680994":"Expedition","FN680995":"Expedition","FN680996":"Expedition",
+    "FN680997":"Expedition","FN680608":"Expedition"
+  },
+  "Pallet Jack":{"90664175":"Inbound","90664174":"Inbound"},
+  "HLOP":{"FN688466":"Outbound","FN688467":"Outbound"},
+  "Short EPT":{"98383237":"eCommerce","98383234":"Expedition","98383225":"Expedition"},
+  "Short Pallet Jack":{"91610193":"eCommerce"}
+};
+
+const type=document.getElementById("type");
+const serial=document.getElementById("serial");
+const dept=document.getElementById("department");
+
+type.addEventListener("change",()=>{
+  serial.innerHTML='<option value="">Select</option>';
+  dept.value='';
+  const set = DATA[type.value];
+  if(!set) return;
+  Object.keys(set).forEach(s=>{
+    const opt=document.createElement("option");
+    opt.value=s;
+    opt.textContent=s;
+    serial.appendChild(opt);
+  });
+});
+
+serial.addEventListener("change",()=>{
+  dept.value = DATA[type.value]?.[serial.value] || '';
+});
+
+
+
+function save(){
+  const opt = {
+    margin: 0.3,
+    filename: 'Checklist_TESLA.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(document.querySelector('.container')).save();
+}
+
+
+
+function send(){
+  const choice = prompt(
+    "Enviar por:\n1 - WhatsApp (PDF)\n2 - Gmail (PDF)\n3 - Correo (PDF)\n4 - Microsoft Teams (PDF)"
+  );
+
+  if(!choice) return;
+
+  // Generate PDF first
+  const opt = {
+    margin: 0.3,
+    filename: 'Checklist_TESLA.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true },
+    jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+  };
+
+  html2pdf().set(opt).from(document.querySelector('.container')).save();
+
+  setTimeout(() => {
+    if(choice === "1"){
+      window.open("https://wa.me/?text=" + encodeURIComponent("Adjunto checklist TESLA en PDF."), "_blank");
+    } else if(choice === "2"){
+      window.open(
+        "https://mail.google.com/mail/?view=cm&fs=1&su=Checklist TESLA&body=Adjunto checklist TESLA en PDF.",
+        "_blank"
+      );
+    } else if(choice === "3"){
+      window.location.href =
+        "mailto:?subject=Checklist TESLA&body=Adjunto checklist TESLA en PDF.";
+    } else if(choice === "4"){
+      window.open(
+        "https://teams.microsoft.com/l/chat/0/0?message=" +
+        encodeURIComponent("Adjunto checklist TESLA en PDF."),
+        "_blank"
+      );
+    }
+  }, 1500);
+}
+
+
+</script>
+
+</body>
+</html>
